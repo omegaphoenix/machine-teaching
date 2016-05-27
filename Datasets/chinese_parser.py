@@ -1,5 +1,6 @@
 import csv,codecs,cStringIO
 import sys, Image, ImageDraw, ImageFont, os
+import errno
 import numpy
 
 class UTF8Recoder:
@@ -44,6 +45,15 @@ class UnicodeWriter:
         for row in rows:
             self.writerow(row)
 
+def mkdir_p(path):
+    try:
+        os.makedirs(path)
+    except OSError as exc:
+        if exc.errno == errno.EEXIST and os.path.isdir(path):
+            pass
+        else:
+            raise
+
 image_paths = []
 with open('dataset.csv','rb') as fin:
     rank = 0
@@ -65,10 +75,9 @@ with open('dataset.csv','rb') as fin:
             try:
                 os.stat(dir)
             except:
-                os.mkdirs(dir)
+                os.mkdir_p(dir)
             image.save(filename, "JPEG")
         rank += 1
-print rank
 class_names = numpy.array([str(r) for r in range(1,rank)])
 numpy.save("chinese/class_names.npy", class_names, allow_pickle=True)
 numpy.save("chinese/class_num_images.npy", numpy.ones(rank-1), allow_pickle=True)
