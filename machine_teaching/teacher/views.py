@@ -129,7 +129,7 @@ def teaching(request):
     X = numpy.load(X_path)
     L = request.session['L']
     #next_sample = int(eer.get_next_sample(X, Y, W, L, testing_samples_))
-    next_sample = 0
+    next_sample = random.randint(0,992)
     image_path = image_paths[next_sample]
     teaching_class_id = sample_classes[next_sample]
 

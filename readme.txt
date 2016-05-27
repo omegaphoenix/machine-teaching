@@ -1,4 +1,5 @@
-Author: Edward Johns (e.johns@imperial.ac.uk)
+Author: Justin Leong
+Based on code by: Edward Johns (e.johns@imperial.ac.uk)
 Project Website: http://visual.cs.ucl.ac.uk/pubs/interactiveMachineTeaching/
 
 This code will enable you to perform both teaching and testing, given a set of labelled images.
@@ -17,10 +18,11 @@ However, customising it to your specific needs will require basic Python, Django
 
 Installation instructions:
 
-1. $ python Datasets/chinese_parser.py
-2. $ cd machine_teaching
-3. $ python manage.py migrate
-4. $ python manage.py runserver 0.0.0.0:8000
+1. $ cd Datasets
+2. $ python chinese_parser.py
+3. $ cd ../machine_teaching
+4. $ python manage.py migrate
+5. $ python manage.py runserver 0.0.0.0:8000
 
 The working demo should then by opening a browser and entering: A.B.C.D:8000/teacher
 Make sure that port 8000 allows data in if you want external access to the website.

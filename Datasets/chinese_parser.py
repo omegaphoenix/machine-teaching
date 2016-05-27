@@ -65,7 +65,7 @@ with open('dataset.csv','rb') as fin:
             try:
                 os.stat(dir)
             except:
-                os.mkdir(dir)
+                os.mkdirs(dir)
             image.save(filename, "JPEG")
         rank += 1
 print rank
