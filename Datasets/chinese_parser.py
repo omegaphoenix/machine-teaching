@@ -51,15 +51,16 @@ with open('dataset.csv','rb') as fin:
     for line in reader:
         if rank == 0:
             pass
-        elif rank == 1:
-            print line
+        else:
             image = Image.new('RGBA', (120,120),(0,0,0))
             draw = ImageDraw.Draw(image)
             font = ImageFont.truetype("simsun.ttc", 120)
             draw.text((0,0), unicode(line[0].encode("utf-8"),"UTF-8"), font=font)
             del draw
-            filename = "../machine_teaching/teacher/static/teacher/images/chinese/" + str(rank) + "/" + line[2] + ".JPG"
-            image_paths.append(filename)
+            filename = "../machine_teaching/teacher/static/"
+            back = "teacher/images/chinese/" + str(rank) + "/" + line[2] + ".JPG"
+            filename += back
+            image_paths.append(back)
             dir = os.path.dirname(filename)
             try:
                 os.stat(dir)
@@ -67,10 +68,10 @@ with open('dataset.csv','rb') as fin:
                 os.mkdir(dir)
             image.save(filename, "JPEG")
         rank += 1
-class_names = numpy.array([str(r) for r in range(1,1001)])
-class_names.tofile("chinese/class_names.npy")
-numpy.ones(1000).tofile("chinese/class_num_images.npy")
-
-
-
-
+print rank
+class_names = numpy.array([str(r) for r in range(1,rank)])
+numpy.save("chinese/class_names.npy", class_names, allow_pickle=True)
+numpy.save("chinese/class_num_images.npy", numpy.ones(rank-1), allow_pickle=True)
+numpy.save("chinese/ground_truth.npy", numpy.identity(rank-1), allow_pickle=True)
+numpy.save("chinese/weight_matrix.npy", numpy.identity(rank), allow_pickle=True)
+numpy.save("chinese/image_paths.npy", numpy.array(image_paths), allow_pickle=True)

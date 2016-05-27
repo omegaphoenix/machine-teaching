@@ -24,10 +24,10 @@ from teacher.models import User, UserResponse
 
 
 # Set the name of the dataset
-dataset_name = 'nhm-butterfly'
+dataset_name = 'chinese'
 # Define the teaching and testing lengths
-num_teaching_images = 20
-num_testing_images = 20
+num_teaching_images = 30
+num_testing_images = 10
 
 
 
@@ -128,7 +128,8 @@ def teaching(request):
     X_path = '../User-Data/X_' + str(user_id_) + '.npy'
     X = numpy.load(X_path)
     L = request.session['L']
-    next_sample = int(eer.get_next_sample(X, Y, W, L, testing_samples_))
+    #next_sample = int(eer.get_next_sample(X, Y, W, L, testing_samples_))
+    next_sample = 0
     image_path = image_paths[next_sample]
     teaching_class_id = sample_classes[next_sample]
 
