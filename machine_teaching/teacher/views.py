@@ -26,8 +26,8 @@ from teacher.models import User, UserResponse
 # Set the name of the dataset
 dataset_name = 'chinese'
 # Define the teaching and testing lengths
-num_teaching_images = 30
-num_testing_images = 10
+num_teaching_images = 3
+num_testing_images = 1
 
 
 
@@ -43,6 +43,10 @@ class_start = [sum(class_num_samples[:n]) for n in range(len(class_num_samples))
 sample_classes = [i for (i,k) in enumerate(class_num_samples) for j in range(k)]
 # Load the image paths
 image_paths = list(numpy.load(os.path.join('../Datasets/' + dataset_name + '/image_paths.npy')))
+# Replace class names with definitions
+class_names = []
+for image in image_paths:
+    class_names.append(image.split("/")[4][:-4])
 
 
 
