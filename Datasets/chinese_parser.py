@@ -79,6 +79,11 @@ with open('dataset.csv','rb') as fin:
             image.save(filename, "JPEG")
         rank += 1
 class_names = numpy.array([str(r) for r in range(1,rank)])
+dir = "chinese"
+try:
+    os.stat(dir)
+except:
+    mkdir_p(dir)
 numpy.save("chinese/class_names.npy", class_names, allow_pickle=True)
 numpy.save("chinese/class_num_images.npy", numpy.ones(rank-1), allow_pickle=True)
 numpy.save("chinese/ground_truth.npy", numpy.identity(rank-1), allow_pickle=True)
