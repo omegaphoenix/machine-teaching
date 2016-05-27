@@ -75,7 +75,7 @@ with open('dataset.csv','rb') as fin:
             try:
                 os.stat(dir)
             except:
-                os.mkdir_p(dir)
+                mkdir_p(dir)
             image.save(filename, "JPEG")
         rank += 1
 class_names = numpy.array([str(r) for r in range(1,rank)])
